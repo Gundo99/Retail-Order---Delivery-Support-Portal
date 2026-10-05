@@ -34,6 +34,36 @@ bookingForm.addEventListener("submit", function (event) {
     const unitPrice = document.getElementById("unitPrice").value;
     const memberStatus = document.getElementById("memberStatus").value;
     const deliveryType = document.getElementById("deliveryType").value;
+    const status = document.getElementById("statusFilter").value;
+
+    // Orders records
+    const orders = [];
+
+    const Order = {
+        id : Number,
+        customerName : Text,
+        productName : Text,
+        quantity : Number,
+        unitPrice : Number,
+        memberStatus : Text,
+        deliveryType : Text,
+        status : Text
+    };
+
+    //Assigning values to the object
+    Order.id = orders.length;
+    Order.customerName = customerName;
+    Order.productName = productName;
+    Order.quantity = quantity;
+    Order.unitPrice = unitPrice;
+    Order.memberStatus = memberStatus;
+    Order.deliveryType = deliveryType;
+    Order.status = "Pending";
+
+    orders.push(Order)
+
+    console.log(orders)
+
 
     // Name validation
     const namePattern = /^[A-Za-z\s]+$/;
@@ -67,6 +97,58 @@ bookingForm.addEventListener("submit", function (event) {
         `;
         return;
     }
+
+const orderList = document.getElementById("orderList");
+const statusFilter = document.getElementById("statusFilter");
+
+// Display orders
+function displayOrders(orders) {
+    orderList.innerHTML = "";
+
+    if (orders.length === 0) {
+        orderList.innerHTML = "<p>No orders found.</p>";
+        return;
+    }
+
+    orders.forEach(function (Order) {
+        const ordersItem = document.createElement("div");
+
+        ordersItem.innerHTML = `
+            <p>
+                <strong>ID:</strong> ${Order.id}<br>
+                <strong>Customer Name:</strong> ${Order.customerName}<br>
+                <strong>Product Name:</strong> ${Order.productName}<br>
+                <strong>Quantity:</strong> ${Order.quantity}<br>
+                <strong>Unit Price:</strong> ${Order.unitPrice}<br>
+                <strong>Member Status:</strong> ${Order.memberStatus}<br>
+                <strong>Delivery Type:</strong> ${Order.deliveryType}<br>
+                <strong>Order Status:</strong> ${Order.status}
+                <button>Completed</button> ${"Completed"}
+            </p>
+            <hr>
+        `;
+
+        orderList.appendChild(ordersItem);
+    });
+}   
+
+// Filter orders
+function filterBookings() {
+    const selectedStatus = status.value;
+
+    const filteredOrders = orders.filter(function (orders) {
+        const statusMatches =
+            selectedStatus === "All" ||
+            orders.status === selectedStatus;
+        return statusMatches;
+    });
+
+    displayOrders(filteredOrders);
+}
+
+// Display all orders when the page loads
+displayOrders(orders);
+statusFilter.addEventListener("change", filterBookings);
 
     const subTotal = calculateBaseCost(quantity, unitPrice);
     const discountAmount = calculateDiscountAmount(subTotal, memberStatus);

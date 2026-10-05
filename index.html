@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service Booking</title>
+    <title>Retail Order & Delivery Support Portal</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="container">
-        <h1>Service Booking Form</h1>
+        <h1>Retail Order & Delivery Support Portal</h1>
 
         <form id="bookingForm">
             <label for="customerName">Customer Name:</label>
@@ -36,7 +36,7 @@
                 <option value="">Select a Delivery Type</option>
                 <option value="Pick-up">Pick-up</option>
                 <option value="Deliver">Deliver at the door</option>
-            </select>           
+            </select>        
 
             <button type="submit">Submit Booking</button>
         </form>
@@ -45,6 +45,17 @@
             <h2>Booking Result</h2>
             <p>No booking submitted yet.</p>
         </div>     
+
+        <div id="orderList"></div>
+
+                <!--to filter by status--> 
+        <label for="statusFilter">Filter by Status:</label>
+        <select id="statusFilter">
+            <option value="All">All Statuses</option>
+            <option value="Pending">Pending</option>
+            <option value="Confirmed">Confirmed</option>
+        </select>
+
     </div>
 
     <script src="script.js"></script>
