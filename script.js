@@ -35,7 +35,7 @@ bookingForm.addEventListener("submit", function (event) {
     const memberStatus = document.getElementById("memberStatus").value;
     const deliveryType = document.getElementById("deliveryType").value;
 
-    // Customer name validation
+    // Name validation
     const namePattern = /^[A-Za-z\s]+$/;
 
     if (customerName === "" || productName === "") {
@@ -52,7 +52,7 @@ bookingForm.addEventListener("submit", function (event) {
         return;
     }
 
-        // Service type validation
+    // Drop down validation
     if (memberStatus === "" || deliveryType === "") {
         output.innerHTML = `
             <p class="error">Please select a service type.</p>
@@ -60,7 +60,7 @@ bookingForm.addEventListener("submit", function (event) {
         return;
     }
 
-    // Hours validation
+    // Numbers validation
     if ( quantity <= 0  || unitPrice <= 0) {
         output.innerHTML = `
             <p class="error">Please enter a valid number, greater than 0.</p>
