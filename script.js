@@ -33,6 +33,40 @@ bookingForm.addEventListener("submit", function (event) {
     const quantity = document.getElementById("quantity").value;
     const unitPrice = document.getElementById("unitPrice").value;
     const memberStatus = document.getElementById("memberStatus").value;
+    const deliveryType = document.getElementById("deliveryType").value;
+
+    // Customer name validation
+    const namePattern = /^[A-Za-z\s]+$/;
+
+    if (customerName === "" || productName === "") {
+        output.innerHTML = `
+            <p class="error">Please enter the correct name.</p>
+        `;
+        return;
+    }
+
+    if (!namePattern.test(customerName) || !namePattern.test(productName)) {
+        output.innerHTML = `
+            <p class="error">Name must contain letters only.</p>
+        `;
+        return;
+    }
+
+        // Service type validation
+    if (memberStatus === "" || deliveryType === "") {
+        output.innerHTML = `
+            <p class="error">Please select a service type.</p>
+        `;
+        return;
+    }
+
+    // Hours validation
+    if ( quantity <= 0  || unitPrice <= 0) {
+        output.innerHTML = `
+            <p class="error">Please enter a valid number, greater than 0.</p>
+        `;
+        return;
+    }
 
     const subTotal = calculateBaseCost(quantity, unitPrice);
     const discountAmount = calculateDiscountAmount(subTotal, memberStatus);
